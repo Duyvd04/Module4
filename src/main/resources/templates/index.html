@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Home
+<h2 th:text="#{app.title}"></h2>
+<a th:href="@{/show-create-form}">Them moi hoc vien</a>
+<p th:text="${msg}"></p>
+<table>
+    <tr>
+        <th th:text="#{app.serial}"></th>
+        <th th:text="#{app.name}">Ho ten</th>
+        <th th:text="#{app.class}">Ten lop</th>
+    </tr>
+    <tr th:each="s,l : ${list}">
+        <td th:text="${l.count}"></td>
+        <td th:text="${s.name}"></td>
+        <td th:text="${s.clazz.name}"></td>
+
+    </tr>
+</table>
+<a th:href="@{/(page=${list.number - 1}, name='a')}" th:if="${(list.hasPrevious())}">Trang truoc</a>
+<!--<span th:text="${list.number + 1} + '/' + ${list.totalPages}"></span>-->
+<a th:each="i: ${#numbers.sequence(0, list.totalPages - 1)}" th:href="@{/(page=${i})}" th:text="${i + 1}"></a>
+<a th:href="@{/(page=${list.number + 1})}" th:if="${(list.hasNext())}">Trang sau</a>
+</body>
+</html>
